@@ -1,20 +1,14 @@
-﻿using Stryker.Core.Mutants;
+﻿using System.Collections.Generic;
+using Stryker.Core.Mutants;
 
-namespace Stryker.Core.Reporters.Html.Realtime;
-
-public interface IRealtimeMutantHandler
+namespace Stryker.Core.Reporters.Html.Realtime
 {
-    public int Port { get; }
-
-    /// <summary>
-    /// Opens the Server Sent Event endpoint for the mutation report to listen to.
-    /// </summary>
-    public void OpenSseEndpoint();
-
-    /// <summary>
-    /// Closes the Server Sent Event endpoint.
-    /// </summary>
-    public void CloseSseEndpoint();
-
-    public void SendMutantTestedEvent(IReadOnlyMutant testedMutant);
+    public interface IRealtimeMutantHandler
+    {
+        int Port { get; }
+        void OpenSseEndpoint();
+        void CloseSseEndpoint();
+        void SendMutantTestedEvent(IReadOnlyMutant testedMutant);
+        IEnumerable<IReadOnlyMutant> GetTestedMutants();
+    }
 }
